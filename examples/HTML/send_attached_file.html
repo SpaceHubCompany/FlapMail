@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HR Form - FlapMail Example</title>
+  <title>Send Attached File - FlapMail Example</title>
 
   <style>
     body { font-family: Arial, sans-serif; background:#07111f; color:#eaf2ff; margin:0; padding:32px; }
@@ -23,18 +23,14 @@
 </head>
 <body>
   <div class="card">
-    <h1>HR Form</h1>
-    <p>An HR intake form with dropdowns for role and work model.</p>
+    <h1>Send Attached File</h1>
+    <p>A file submission example. Maximum allowed attachment size is 3 MB.</p>
     <form id="flapmail-form">
 
       <label for="name">Full Name</label><input id="name" name="name" required />
       <label for="email">Email</label><input id="email" name="email" type="email" required />
-      <label for="position">Position of Interest</label>
-      <select id="position" name="position" required><option value="">Select one</option><option>Software Engineer</option><option>Product Manager</option><option>Designer</option><option>Support Specialist</option></select>
-      <label for="work_model">Work Model</label>
-      <select id="work_model" name="work_model" required><option value="">Select one</option><option>On-site</option><option>Hybrid</option><option>Remote</option></select>
-      <label for="linkedin">LinkedIn or Portfolio URL</label><input id="linkedin" name="linkedin" />
-      <label for="message">Summary</label><textarea id="message" name="message" required></textarea>
+      <label for="message">Message</label><textarea id="message" name="message" required></textarea>
+      <label for="file">Attachment (max 3 MB)</label><input id="file" name="file" type="file" required />
 
       <button type="submit">Send</button>
       <p class="note">Update the token constant before using this example.</p>
@@ -59,6 +55,11 @@
       formData.append('token', FLAPMAIL_TOKEN);
       // format can be 'html' or 'text'
       formData.append('format', 'html');
+
+      const file = formData.get('file');
+      if (!(file instanceof File) || !file.name) { setStatus('Please select a file before sending.', false); return; }
+      if (file.size > 3 * 1024 * 1024) { setStatus('The selected file exceeds the 3 MB limit.', false); return; }
+      formData.append('form_type', 'docs');
 
       try {
         const response = await fetch(FLAPMAIL_ENDPOINT, { method: 'POST', body: formData });
