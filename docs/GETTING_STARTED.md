@@ -6,9 +6,9 @@ This guide shows how to create your FlapMail account, create a sender, and prepa
 
 1. Open the FlapMail platform.
 2. Click **Sign up**.
-3. Enter your email address and password.
-4. Confirm your account if the platform asks for email verification.
-5. Log in.
+3. Enter your email address, and click send Token.
+4. Enter the token you received on e-mail 
+5. Click Enter to Log in.
 
 ## 2. Open the dashboard
 
