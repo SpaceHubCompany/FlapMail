@@ -1,0 +1,1 @@
+Sample attachment for the FlapMail Java example.
