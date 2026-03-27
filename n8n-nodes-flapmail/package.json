@@ -1,0 +1,49 @@
+{
+  "name": "n8n-nodes-flapmail",
+  "version": "0.1.0",
+  "description": "n8n community node for FlapMail",
+  "license": "MIT",
+  "homepage": "https://github.com/SpaceHubCompany/flapmail/tree/main/n8n-nodes-flapmail",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceHubCompany/flapmail.git",
+    "directory": "n8n-nodes-flapmail"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "flapmail",
+    "email",
+    "notification"
+  ],
+  "author": "SpaceHubCompany",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build"
+  },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/FlapMailApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/FlapMail/FlapMail.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "eslint": "^8.57.0",
+    "gulp": "^4.0.2",
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
