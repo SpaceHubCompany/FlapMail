@@ -24,7 +24,7 @@ The submit API applies per-token limits to reduce automated abuse and spam:
 - automatic rejection with HTTP `429` when an active rate limit is exceeded
 - honeypot validation that silently discards likely bot submissions
 
-These values are controlled by the service and may be adjusted to protect platform availability and sender reputation. See [Service Limitations](docs/LIMITATION.md) for response behavior, implementation details, and the current status of the abuse-block setting.
+These values are controlled by the service and may be adjusted to protect platform availability and sender reputation. See [Anti-Abuse Policy](docs/ANTI-ABUSE.md) for response behavior, implementation details, and the current status of the abuse-block setting.
 
 ## Why FlapMail
 
@@ -58,7 +58,7 @@ FlapMail/
 │  ├─ AI_PROMPTS.md
 │  ├─ EXAMPLES.md
 │  ├─ FAQ.md
-│  └─ LIMITATION.md
+│  └─ ANTI-ABUSE.md
 ├─ examples/
 │  ├─ HTML/
 │  ├─ PHP/
@@ -137,4 +137,4 @@ See the `examples` folder for all language-specific files.
 - [Examples Guide](docs/EXAMPLES.md)
 - [AI Integration Prompts](docs/AI_PROMPTS.md)
 - [FAQ](docs/FAQ.md)
-- [Service Limitations](docs/LIMITATION.md)
+- [Anti-Abuse Policy](docs/ANTI-ABUSE.md)

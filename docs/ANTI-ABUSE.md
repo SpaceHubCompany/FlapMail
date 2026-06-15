@@ -1,4 +1,4 @@
-# Service Limitations
+# Anti-Abuse Policy
 
 FlapMail is a free transactional email delivery service for contact forms, website notifications, scripts, devices, and application alerts. It is not intended for newsletters, unsolicited messages, bulk email, or mass-marketing campaigns.
 

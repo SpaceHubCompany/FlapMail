@@ -46,4 +46,4 @@ Requests may also be rejected by hosting-level security controls when they match
 ## Is the 60-minute abuse block active?
 Not yet on the submit endpoint. A 60-minute abuse-block duration is present in the service configuration, but it is currently reserved for future IP-based blocking. The active protections today are the 3-second interval, the 5-minute window, the daily token cap, honeypot filtering, and hosting-level security rules.
 
-See [Service Limitations](LIMITATION.md) for the complete behavior.
+See [Anti-Abuse Policy](ANTI-ABUSE.md) for the complete behavior.
