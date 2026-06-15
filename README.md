@@ -12,6 +12,20 @@ The integration pattern is straightforward:
 - generate a token
 - submit form data to the FlapMail endpoint
 
+## Rate limits and anti-abuse protection
+
+FlapMail is intended for transactional messages, form notifications, and application alerts. It is not a bulk-email or mass-marketing service.
+
+The submit API applies per-token limits to reduce automated abuse and spam:
+
+- minimum interval of 3 seconds between consecutive sends
+- maximum of 50 sends within a 5-minute window
+- maximum of 200 sends per token per calendar day
+- automatic rejection with HTTP `429` when an active rate limit is exceeded
+- honeypot validation that silently discards likely bot submissions
+
+These values are controlled by the service and may be adjusted to protect platform availability and sender reputation. See [Service Limitations](docs/LIMITATION.md) for response behavior, implementation details, and the current status of the abuse-block setting.
+
 ## Why FlapMail
 
 - Fast setup for contact forms and email notifications
@@ -43,7 +57,8 @@ FlapMail/
 │  ├─ GENERATE_TOKEN.md
 │  ├─ AI_PROMPTS.md
 │  ├─ EXAMPLES.md
-│  └─ FAQ.md
+│  ├─ FAQ.md
+│  └─ LIMITATION.md
 ├─ examples/
 │  ├─ HTML/
 │  ├─ PHP/
@@ -122,3 +137,4 @@ See the `examples` folder for all language-specific files.
 - [Examples Guide](docs/EXAMPLES.md)
 - [AI Integration Prompts](docs/AI_PROMPTS.md)
 - [FAQ](docs/FAQ.md)
+- [Service Limitations](docs/LIMITATION.md)
