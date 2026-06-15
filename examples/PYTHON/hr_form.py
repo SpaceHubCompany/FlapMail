@@ -26,5 +26,6 @@ payload['format'] = 'html'
 encoded = urllib.parse.urlencode(payload).encode('utf-8')
 request = urllib.request.Request(ENDPOINT, data=encoded, method='POST')
 request.add_header('Content-Type', 'application/x-www-form-urlencoded')
+request.add_header('User-Agent', 'FlapMail/1.0')
 with urllib.request.urlopen(request, timeout=20) as response:
     print(response.read().decode('utf-8'))

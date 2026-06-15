@@ -28,11 +28,7 @@ def build_multipart(fields: dict, file_field: str, file_path: str):
     lines.append(f'Content-Disposition: form-data; name="{file_field}"; filename="{filename}"')
     lines.append(f'Content-Type: {mime}')
     lines.append('')
-    body = '
-'.join(lines).encode('utf-8') + b'
-' + open(file_path, 'rb').read() + b'
-' + f'--{boundary}--
-'.encode('utf-8')
+    body = '\r\n'.join(lines).encode('utf-8') + b'\r\n' + open(file_path, 'rb').read() + b'\r\n' + f'--{boundary}--\r\n'.encode('utf-8')
     return boundary, body
 
 file_path = 'sample_attachment.txt'
@@ -55,5 +51,6 @@ if not is_valid_email(payload['email']):
 boundary, body = build_multipart(payload, 'file', file_path)
 request = urllib.request.Request(ENDPOINT, data=body, method='POST')
 request.add_header('Content-Type', f'multipart/form-data; boundary={boundary}')
+request.add_header('User-Agent', 'FlapMail/1.0')
 with urllib.request.urlopen(request, timeout=30) as response:
     print(response.read().decode('utf-8'))

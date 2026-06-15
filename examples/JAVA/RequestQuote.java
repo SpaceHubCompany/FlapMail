@@ -16,7 +16,7 @@ public class RequestQuote {
     private static final String ENDPOINT = "https://app.flapmail.net/api/submit.php";
 
     private static boolean isValidEmail(String email) {
-        return email != null && email.matches("^[^\s@]+@[^\s@]+\.[^\s@]+$");
+        return email != null && email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {

@@ -16,7 +16,7 @@ public class SendAttachedFile {
     private static final String ENDPOINT = "https://app.flapmail.net/api/submit.php";
 
     private static boolean isValidEmail(String email) {
-        return email != null && email.matches("^[^\s@]+@[^\s@]+\.[^\s@]+$");
+        return email != null && email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -34,8 +34,7 @@ public class SendAttachedFile {
             return;
         }
         String boundary = "----FlapMailBoundary" + System.currentTimeMillis();
-        String CRLF = "
-";
+        String CRLF = "\r\n";
         StringBuilder builder = new StringBuilder();
         Map<String, String> payload = new LinkedHashMap<>();
         payload.put("name", "Alex Johnson");
@@ -47,13 +46,13 @@ public class SendAttachedFile {
         payload.put("format", "html");
         for (Map.Entry<String, String> entry : payload.entrySet()) {
             builder.append("--").append(boundary).append(CRLF);
-            builder.append("Content-Disposition: form-data; name="").append(entry.getKey()).append(""").append(CRLF).append(CRLF);
+            builder.append("Content-Disposition: form-data; name=\"").append(entry.getKey()).append("\"").append(CRLF).append(CRLF);
             builder.append(entry.getValue()).append(CRLF);
         }
         byte[] fileBytes = Files.readAllBytes(filePath);
         byte[] prefix = builder.toString().getBytes(StandardCharsets.UTF_8);
         byte[] fileHeader = ("--" + boundary + CRLF +
-                "Content-Disposition: form-data; name="file"; filename="" + filePath.getFileName() + """ + CRLF +
+                "Content-Disposition: form-data; name=\"file\"; filename=\"" + filePath.getFileName() + "\"" + CRLF +
                 "Content-Type: application/octet-stream" + CRLF + CRLF).getBytes(StandardCharsets.UTF_8);
         byte[] suffix = (CRLF + "--" + boundary + "--" + CRLF).getBytes(StandardCharsets.UTF_8);
         byte[] body = new byte[prefix.length + fileHeader.length + fileBytes.length + suffix.length];
